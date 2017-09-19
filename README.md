@@ -1,0 +1,2 @@
+# osm_jmesh_length
+OpenStreetMapの総延長を３次メッシュ毎に算出し、他の統計情報と比較してみる
