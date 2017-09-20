@@ -103,3 +103,10 @@ ORDER BY 1 ;
 ```
 
 結果は[こちら (osm_kanto_diff.tsv) ](osm_kanto_diff.tsv)
+
+#### QGis2threejsでの表示例
+
+- 青：DRMの方が道路延長が長い
+- 赤：OpenStreetMapの方が道路延長が長い
+
+![qgisthree](./img/qgisthree.png)
