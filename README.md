@@ -68,8 +68,8 @@ CREATE TABLE ans_road_length AS
 SELECT
 	  r.n04_001 AS mesh_code_3rd --３次メッシュコード 
 	, SUM(  ST_Length( ST_Intersection( o.the_geom , r.the_geom )::geography ) ) AS osm_road_length --OSMの道路延長 
-	, n04_056::int drm_road_length --道路総延長
-	, r.the_geom --3次メッシュ形状
+	, n04_055::int drm_road_length --道路総延長
+	, r.the_geom --3次メッシュ形状
   FROM public.osm_jp_kanto AS o , public.h22_road_5439 AS r
   WHERE 
     --NOT IN 句で歩道・自転車道などを除外  
