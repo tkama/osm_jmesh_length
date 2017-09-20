@@ -2,7 +2,7 @@
 OpenStreetMapの総延長を３次メッシュ毎に算出し、他の統計情報と比較してみる
 
 ## 実行環境
-- PostgreSQL : 空間情報処理の拡張機能であるPostGISを使って加工、集計を行います。(開発時 9.6.3 / 推奨 9.3 以上)
+- PostgreSQL : 空間情報処理の拡張機能であるPostGISを使って加工、集計を行います。(開発時 9.6.3 / 推奨 9.3 以上)
 - QGIS : shapeデータのPostgresqlへのインポート、可視化に用います。（開発時 2.14）
 
 # STEP1 データの取得とインポート
@@ -10,14 +10,14 @@ OpenStreetMapの総延長を３次メッシュ毎に算出し、他の統計情�
 ## データ取得
 ### OSMデータのダウンロード
 geofablinkから調査したいエリアのshapeファイルを選択します。
-[リンク先](http://download.geofabrik.de/asia/japan.html)は日本エリア一覧が表示されます。関東地方を例に説明します。[Kantō regionの.shp.zip]([http://download.geofabrik.de/asia/japan/kanto-latest-free.shp.zip])
+[リンク先](http://download.geofabrik.de/asia/japan.html)は日本エリア一覧が表示されます。関東地方を例に説明します。[Kantō regionの.shp.zip]([http://download.geofabrik.de/asia/japan/kanto-latest-free.shp.zip])
 
-ダウンロードしてZIPファイルを解凍して下さい。
+ダウンロードしてZIPファイルを解凍して下さい。
 
 ### 国土数値情報　道路密度・道路延長メッシュデータ
 
 国土数値情報のダウンロードサービスの[Webサイト](http://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-N04.html)からダウンロードが可能です。
-１次メッシュ単位でダウンドード対象を選択可能です。今回はメッシュ番号5439の平成２２年度のデータを選択します。
+１次メッシュ単位でダウンドード対象を選択可能です。今回はメッシュ番号5439の平成２２年度のデータを選択します。
 
 ダウンロードしてZIPファイルを解凍して下さい。
 
@@ -27,8 +27,7 @@ QGJISを立ち上げ、ダウンロードしたshapeファイルをPostgreSQLに
 
 ［手順］データベース → DBマネージャ → PostGISを選択 → データベースを選択 → レイヤー/ファイルのインポートボタンを選択 
 
-![Qiita](./img/qgis1.png "Qiita")
-
+<img src="./img/qgis1.png " width=50%>
 今回は空間情報処理を行いますので、「空間インデックスを作成する」にチェックを入れて下さい。
 
 ２つのshapeデータをQGISでPostgreSQLに投入しました。
@@ -59,8 +58,8 @@ GROUP BY 1 ;
 
 ### ３次メッシュ毎の道路延長の算出
 
-国土数値情報　道路密度・道路延長メッシュデータの３次メッシュの内部にあるOSMの道路を特定し、内部にある道路だけを切り出して、道路長を計算します。
-比較対象として国土数値情報の道路延長も出力しています。
+国土数値情報　道路密度・道路延長メッシュデータの３次メッシュの内部にあるOSMの道路を特定し、内部にある道路だけを切り出して、道路長を計算します。
+比較対象として国土数値情報の道路延長も出力しています。
 
 計算結果をテーブル名「ans_road_length」として保存しています。
 
@@ -89,13 +88,13 @@ GROUP BY 1 , 3 , 4
 
 ### ３次メッシュ毎の道路延長の比較
 
-道路延長の算出結果から、OpenStreetMapと国土数値情報（DRM）とを比較します。
+道路延長の算出結果から、OpenStreetMapと国土数値情報（DRM）とを比較します。
 
-```sql:diff_road_class_length.sql
+```sql:diff_road_class_length.sql
 SELECT 
      mesh_code_3rd --3次メッシュコード
    , osm_road_length --OpenStreetMap道路延長[ｍ]
-   , trunc(drm_road_length - osm_road_length) AS diff_length --道路延長差分[ｍ]（ drm - osm )
+   , trunc(drm_road_length - osm_road_length) AS diff_length --道路延長差分[ｍ]（ drm - osm )
    , trunc( ((drm_road_length - osm_road_length)/drm_road_length * 100 ) :: numeric ,2) AS diff_percentage -- 道路延長比率[%] ( drm - osm )/drm * 100  
    , ST_AsText( the_geom ) AS wkt　-- メッシュ形状
 FROM
