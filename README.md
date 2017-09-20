@@ -73,8 +73,8 @@ SELECT
   FROM public.osm_jp_kanto AS o , public.h22_road_5439 AS r
   WHERE 
     --NOT IN 句で歩道・自転車道などを除外  
-    fclass NOT
-	IN('pedestrian',
+    fclass NOT　IN(
+    	'pedestrian',
 	'track','footway','bridleway','steps','path','cycleway',
 	'track_grade1','track_grade2','track_grade4','track_grade3','track_grade5',
 	'unknown')
