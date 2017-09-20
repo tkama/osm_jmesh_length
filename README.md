@@ -45,7 +45,7 @@ geography型にキャストした線形状の空間情報は、ST_Length関数�
 
 下記SQLは、道路種別(fclass)毎に道路延長と道路の本数をを求めます。
 
-```sql:osm_jmesh_length.sql
+```sql : osm_jmesh_length.sql
 SELECT
 	fclass
 	, SUM( ST_Length( the_geom :: geography ) ) AS road_length 
