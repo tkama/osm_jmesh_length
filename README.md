@@ -95,7 +95,7 @@ SELECT
      mesh_code_3rd --3次メッシュコード
    , osm_road_length --OpenStreetMap道路延長[ｍ]
    , trunc(drm_road_length - osm_road_length) AS diff_length --道路延長差分[ｍ]（ drm - osm )
-   , trunc( ((drm_road_length - osm_road_length)/drm_road_length * 100 ) :: numeric ,2) AS diff_percentage -- 道路延長比率[%] ( drm - osm )/drm * 100  
+   , trunc( ((drm_road_length - osm_road_length)/drm_road_length * 100 ) :: numeric ,2) AS diff_percentage -- 道路延長比率[%] 
    , ST_AsText( the_geom ) AS wkt　-- メッシュ形状
 FROM
  ans_road_length
