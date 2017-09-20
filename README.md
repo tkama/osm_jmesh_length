@@ -63,7 +63,7 @@ GROUP BY 1 ;
 
 計算結果をテーブル名「ans_road_length」として保存しています。
 
-```sql:sum_road_class_length.sql
+```sql : sum_road_class_length.sql
 CREATE TABLE ans_road_length AS 
 SELECT
 	  r.n04_001 AS mesh_code_3rd --３次メッシュコード 
@@ -90,7 +90,7 @@ GROUP BY 1 , 3 , 4
 
 道路延長の算出結果から、OpenStreetMapと国土数値情報（DRM）とを比較します。
 
-```sql:diff_road_class_length.sql
+```sql : diff_road_class_length.sql
 SELECT 
      mesh_code_3rd --3次メッシュコード
    , osm_road_length --OpenStreetMap道路延長[ｍ]
